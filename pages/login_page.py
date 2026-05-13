@@ -18,9 +18,14 @@ class LoginPage:
             wait_until="networkidle"
         )
 
-        self.page.locator(
+        username_input = self.page.locator(
             LoginLocator.USERNAME_INPUT
-        ).fill(USERNAME)
+        )
+
+        if not username_input.is_visible(timeout=5000):
+            return
+
+        username_input.fill(USERNAME)
 
         self.page.locator(
             LoginLocator.PASSWORD_INPUT
@@ -31,3 +36,5 @@ class LoginPage:
         ).click()
 
         self.page.wait_for_load_state("networkidle")
+
+        self.page.context.storage_state(path="user_data/storage_state.json")

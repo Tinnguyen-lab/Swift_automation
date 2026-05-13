@@ -18,6 +18,8 @@ def test_qs_001(page):
 
         page.wait_for_load_state("networkidle")
 
+        quick_sale_page.go_to_salon_center()
+
         quick_sale_page.open_quick_sale()
 
         quick_sale_page.select_tech()
@@ -28,10 +30,8 @@ def test_qs_001(page):
 
         quick_sale_page.add_tip(TIP_AMOUNT)
 
-        quick_sale_page.save_ticket()
-
         quick_sale_page.payment_full_cash()
-
+        
         quick_sale_page.close_bill()
 
         expect(
